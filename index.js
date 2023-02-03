@@ -14,9 +14,9 @@ require('dotenv').config();
 // ))
 
 
-app.get('/',(req,res)=>{
-    res.send("hello")
-})
+// app.get('/',(req,res)=>{
+//     res.send("hello")
+// })
 
 
 app.use('/users',UserRouter);
