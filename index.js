@@ -18,7 +18,7 @@ app.use(cors(
 //     res.send("hello")
 // })
 
-
+mongoose.set('strictQuery',false);
 app.use('/users',UserRouter);
 
 
