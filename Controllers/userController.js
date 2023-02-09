@@ -11,14 +11,14 @@ const getUser = (req, res) => {
 
 const setUser = (req, res) => {
   const username = req.body.username;
-  // const firstname = req.body.firstname;
-  // const lastname =  req.body.lastname;
-    // console.log(username + " " + password);
+  const firstname = req.body.firstname;
+  const lastname=  req.body.lastname;
+    // console.log(username + " " + password + fn + " " +ln);
  
   bcrypt.genSalt(10, (err,salt) => {
     bcrypt.hash(req.body.password,salt,(err,hashedPassword)=>{
       const password = hashedPassword;
-      const newUser = new Users({ username, password});
+      const newUser = new Users({ username, password, firstname ,lastname});
       newUser
       .save()
       .then(() => res.json("user added!!"))
@@ -32,10 +32,15 @@ const setUser = (req, res) => {
 
 const updateUser = (req, res) => {
   Users.findById(req.params.id)
+
     .then((user) => {
       user.username = req.body.username;
-      user.password = req.body.password;
-     
+      user.firstname = req.body.firstname;
+      user.lastname = req.body.lastname;
+      bcrypt.genSalt(10, (err,salt) => {
+        bcrypt.hash( user.password = req.body.password,salt,(err,hashedPassword)=>{
+          user.password = hashedPassword;
+        })})
       user
         .save()
         .then(() => res.json("user updated"))
