@@ -11,8 +11,8 @@ const getUser = (req, res) => {
 
 const setUser = (req, res) => {
   const username = req.body.username;
-  const firstname = req.body.firstname;
-  const lastname =  req.body.lastname;
+  // const firstname = req.body.firstname;
+  // const lastname =  req.body.lastname;
     console.log(username + " " + password);
  
   bcrypt.genSalt(10, (err,salt) => {
