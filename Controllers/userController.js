@@ -13,12 +13,12 @@ const setUser = (req, res) => {
   const username = req.body.username;
   // const firstname = req.body.firstname;
   // const lastname =  req.body.lastname;
-    console.log(username + " " + password);
+    // console.log(username + " " + password);
  
   bcrypt.genSalt(10, (err,salt) => {
     bcrypt.hash(req.body.password,salt,(err,hashedPassword)=>{
       const password = hashedPassword;
-      const newUser = new Users({ username, password,firstname,lastname });
+      const newUser = new Users({ username, password});
       newUser
       .save()
       .then(() => res.json("user added!!"))
