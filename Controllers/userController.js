@@ -13,12 +13,13 @@ const setUser = (req, res) => {
   const username = req.body.username;
   const firstname = req.body.firstname;
   const lastname=  req.body.lastname;
+  const  emailid= req.body. emailid;
     // console.log(username + " " + password + fn + " " +ln);
  
   bcrypt.genSalt(10, (err,salt) => {
     bcrypt.hash(req.body.password,salt,(err,hashedPassword)=>{
       const password = hashedPassword;
-      const newUser = new Users({ username, password, firstname ,lastname});
+      const newUser = new Users({ username, password, firstname ,lastname,  emailid});
       newUser
       .save()
       .then(() => res.json("user added!!"))
@@ -34,7 +35,7 @@ const updateUser = (req, res) => {
   Users.findById(req.params.id)
 
     .then((user) => {
-      user.username = req.body.username;
+      // user.username = req.body.username;
       user.firstname = req.body.firstname;
       user.lastname = req.body.lastname;
       bcrypt.genSalt(10, (err,salt) => {
