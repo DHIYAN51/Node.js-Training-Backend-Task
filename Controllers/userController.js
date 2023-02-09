@@ -1,5 +1,8 @@
 const Users = require("../model/user.model");
 const bcrypt = require ('bcrypt')
+
+
+
 const getUser = (req, res) => {
   Users.find()
     .then((users) => res.json(users))
@@ -8,11 +11,14 @@ const getUser = (req, res) => {
 
 const setUser = (req, res) => {
   const username = req.body.username;
-
+  const firstname = req.body.firstname;
+  const lastname =  req.body.lastname;
+    console.log(username + " " + password);
+ 
   bcrypt.genSalt(10, (err,salt) => {
     bcrypt.hash(req.body.password,salt,(err,hashedPassword)=>{
       const password = hashedPassword;
-      const newUser = new Users({ username, password });
+      const newUser = new Users({ username, password,firstname,lastname });
       newUser
       .save()
       .then(() => res.json("user added!!"))
@@ -20,8 +26,7 @@ const setUser = (req, res) => {
     })
   })
 }
-  // console.log(username + " " + password);
- 
+
  
  
 
@@ -30,7 +35,7 @@ const updateUser = (req, res) => {
     .then((user) => {
       user.username = req.body.username;
       user.password = req.body.password;
-
+     
       user
         .save()
         .then(() => res.json("user updated"))
