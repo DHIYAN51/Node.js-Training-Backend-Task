@@ -24,7 +24,8 @@ const setUser = (req, res) => {
       newUser
       .save()
       .then(() => res.json("user added!!"))
-      .catch((err) => res.status(400).json("Error: " + err));
+      .catch((err) => res.status(400).json("Invalid User Data"));
+     
     })
   })
 }
