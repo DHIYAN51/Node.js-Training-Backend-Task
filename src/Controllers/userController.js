@@ -3,8 +3,9 @@ const bcrypt = require ('bcrypt')
 
 
 
-const getUser = (req, res) => {
-  Users.find()
+const getUser = async(req, res) => {
+
+ Users.find()
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 };

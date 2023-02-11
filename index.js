@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose  = require('mongoose');
-const UserRouter = require('./routes/user')
+const UserRouter = require('./src/routes/user')
 
 const app = express();
 app.use(express.json());
@@ -31,7 +31,7 @@ connection.once('open',()=>{
     console.log("Mongoose database connection established successfully")
 })
 
-const port = 8000
+const port = 8001
 app.listen(port,()=>{
     console.log(`server is running in port ${port}`);
 })
