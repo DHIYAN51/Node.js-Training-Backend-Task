@@ -16,14 +16,25 @@ const setUser = async (req, res) => {
   // const lastname=  req.body.lastname;
   // const  emailid= req.body.emailid;
   // console.log(username + " " + password + fn + " " +ln);
-  const alreadyExistUser = await Users.findOne({ emailid}).catch(
+  const alreadyExistUser = await Users.findOne({emailid}).catch(
     (err) => {
       console.log("Error: ", err);
     }
   );
+  
   if (alreadyExistUser) {
     return res.status(409).json({ message: "User is already exists" });
   }
+
+  // const alreadyExistname = await Users.findOne({username}).catch(
+  //   (err) => {
+  //     console.log("Error: ", err);
+  //   }
+  // );
+ 
+  // if (alreadyExistname) {
+  //   return res.status(409).json({ message: "User's--> Username is already exists" });
+  // }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = new Users({

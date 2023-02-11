@@ -1,38 +1,33 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose  = require('mongoose');
-const UserRouter = require('./src/routes/user')
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const UserRouter = require("./src/routes/user");
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended:false}))
-require('dotenv').config();
-app.use(cors(
-    {
-        origin: "*"
-    }
-))
+app.use(express.urlencoded({ extended: false }));
+require("dotenv").config();
+app.use(cors());
 
 
 // app.get('/',(req,res)=>{
 //     res.send("hello")
 // })
 
-mongoose.set('strictQuery',false);
-app.use('/users',UserRouter);
-
+mongoose.set("strictQuery", false);
+app.use("/users", UserRouter);
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,err=>{
-    if(err) throw err;
-})
+mongoose.connect(uri, (err) => {
+  if (err) throw err;
+});
 const connection = mongoose.connection;
-connection.once('open',()=>{
-    console.log("Mongoose database connection established successfully")
-})
+connection.once("open", () => {
+  console.log("Mongoose database connection established successfully");
+});
 
-const port = 8001
-app.listen(port,()=>{
-    console.log(`server is running in port ${port}`);
-})
+const port = 8001;
+app.listen(port, () => {
+  console.log(`server is running in port ${port}`);
+});
 // app.listen(8001)
