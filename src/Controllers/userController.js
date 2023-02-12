@@ -10,13 +10,13 @@ const getUser = async (req, res) => {
 };
 
 const setUser = async (req, res) => {
-  const { username, firstname, lastname, emailid, password } = req.body;
+  const { username, firstname, lastname, email, password } = req.body;
   // const username = req.body.username;
   // const firstname = req.body.firstname;
   // const lastname=  req.body.lastname;
   // const  emailid= req.body.emailid;
   // console.log(username + " " + password + fn + " " +ln);
-  const alreadyExistUser = await Users.findOne({emailid}).catch(
+  const alreadyExistUser = await Users.findOne({email}).catch(
     (err) => {
       console.log("Error: ", err);
     }
@@ -42,7 +42,7 @@ const setUser = async (req, res) => {
     password: hashedPassword,
     firstname,
     lastname,
-    emailid,
+    email,
   });
   const savedUser = await newUser.save().catch((err) => {
     console.log("Error: ", err);
