@@ -69,7 +69,6 @@ const updateUser = (req, res) => {
       // user.username = req.body.username;
       user.firstname = req.body.firstname;
       user.lastname = req.body.lastname;
-      user.emailid = req.body.emailid;
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(
           (user.password = req.body.password),
