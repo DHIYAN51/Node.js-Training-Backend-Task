@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 const UserRouter = require("./src/routes/user");
 
 const app = express();
+const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/*+json' }))
 require("dotenv").config();
 app.use(cors(
     

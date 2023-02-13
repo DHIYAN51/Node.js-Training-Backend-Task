@@ -9,14 +9,18 @@ const getUser = async (req, res) => {
   //     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+
+
 const setUser = async (req, res) => {
-  const { username, firstname, lastname, email, password } = req.body;
+  const { username, firstname, lastname, emailid, password ,timestamps} = req.body;
   // const username = req.body.username;
   // const firstname = req.body.firstname;
   // const lastname=  req.body.lastname;
   // const  emailid= req.body.emailid;
   // console.log(username + " " + password + fn + " " +ln);
-  const alreadyExistUser = await Users.findOne({email}).catch(
+
+console.log(req.body);
+  const alreadyExistUser = await Users.findOne({emailid}).catch(
     (err) => {
       console.log("Error: ", err);
     }
@@ -42,7 +46,8 @@ const setUser = async (req, res) => {
     password: hashedPassword,
     firstname,
     lastname,
-    email,
+    emailid,
+    timestamps,
   });
   const savedUser = await newUser.save().catch((err) => {
     console.log("Error: ", err);
@@ -64,6 +69,7 @@ const updateUser = (req, res) => {
       // user.username = req.body.username;
       user.firstname = req.body.firstname;
       user.lastname = req.body.lastname;
+      user.emailid = req.body.emailid;
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(
           (user.password = req.body.password),
