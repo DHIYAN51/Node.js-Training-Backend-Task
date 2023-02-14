@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const mongoose = require("mongoose");
 const UserRouter = require("./src/routes/user");
-
+const LoginRouter = require("./src/routes/login")
 const app = express();
 const bodyParser = require('body-parser');
 app.use(express.json());
@@ -20,6 +20,7 @@ app.use(cors(
 
 mongoose.set("strictQuery", false);
 app.use("/users", UserRouter);
+app.use("/login",LoginRouter)
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, (err) => {

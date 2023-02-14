@@ -47,7 +47,7 @@ console.log(req.body);
     firstname,
     lastname,
     emailid,
-    timestamps,
+   
   });
   const savedUser = await newUser.save().catch((err) => {
     console.log("Error: ", err);
