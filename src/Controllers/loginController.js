@@ -2,9 +2,9 @@ const Login = require("../model/login.model");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const registerUser = async (req, res) => {
-  const { emailid, password, name } = req.body;
+  const { emailid, password, name, confirmpassword } = req.body;
    
-  if (!name || !password || !emailid) {
+  if (!name || !password || !emailid || !confirmpassword) {
     return res.status(400).json(  "Please Fill All the Fields" );
   }
   const userExits = await Login.findOne({ emailid });
@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
   
 
   const user = await Login.create({
-    name,emailid,password:hashedPassword
+    name,emailid,password:hashedPassword,confirmpassword:hashedPassword
   })
  if(user){
     return res.status(201).json({
