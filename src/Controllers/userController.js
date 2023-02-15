@@ -12,7 +12,7 @@ const getUser = async (req, res) => {
 
 
 const setUser = async (req, res) => {
-  const { username, firstname, lastname, emailid, password ,timestamps} = req.body;
+  const { username, firstname, lastname, emailid, password} = req.body;
   // const username = req.body.username;
   // const firstname = req.body.firstname;
   // const lastname=  req.body.lastname;

@@ -4,7 +4,7 @@ const JWT = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 require("dotenv").config();
 // Get all users
-const details =async (req, res) => {
+const details = async (req, res) => {
   const users = await Login.find();
   res.status(200).json(users);
 };
@@ -55,13 +55,7 @@ const loginUser = async (req, res) => {
   const user = await Login.findOne({ email });
   // If user not found, send error message
   if (!user) {
-    return res.status(400).json({
-      errors: [
-        {
-          msg: "Invalid credentials",
-        },
-      ],
-    });
+    return res.status(400).json("Invalid credentials");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
